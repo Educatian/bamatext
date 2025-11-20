@@ -36,6 +36,47 @@ export const signOut = async () => {
     await supabase.auth.signOut();
 };
 
+export const signInWithOAuth = async (provider: 'google' | 'github') => {
+    if (!supabase) throw new Error("Supabase not initialized");
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+            redirectTo: window.location.origin
+        }
+    });
+    if (error) throw error;
+    return data;
+};
+
+export const signInWithPassword = async (email: string, password: string) => {
+    if (!supabase) throw new Error("Supabase not initialized");
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+    if (error) throw error;
+    return data;
+};
+
+export const signUpWithPassword = async (email: string, password: string) => {
+    if (!supabase) throw new Error("Supabase not initialized");
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
+    if (error) throw error;
+    return data;
+};
+
+export const updatePassword = async (password: string) => {
+    if (!supabase) throw new Error("Supabase not initialized");
+    const { data, error } = await supabase.auth.updateUser({
+        password
+    });
+    if (error) throw error;
+    return data;
+};
+
 // --- DATA SYNC ---
 
 // Save the entire student state blob
