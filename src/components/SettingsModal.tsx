@@ -35,8 +35,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
     const testGemini = async () => {
         setStatus('idle');
         setTestMsg('Testing Gemini...');
+        const keyToTest = import.meta.env.VITE_GEMINI_API_KEY || apiKey;
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${keyToTest}`);
             const data = await response.json();
 
             if (data.error) {
@@ -78,21 +79,28 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                         <label className="block text-sm font-medium text-slate-700 mb-1">
                             Google Gemini API Key
                         </label>
-                        <div className="flex gap-2">
-                            <input
-                                type="password"
-                                value={apiKey}
-                                onChange={(e) => setApiKey(e.target.value)}
-                                placeholder="AIza..."
-                                className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                            />
-                            <button
-                                onClick={testGemini}
-                                className="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors text-sm"
-                            >
-                                Test
-                            </button>
-                        </div>
+                        {import.meta.env.VITE_GEMINI_API_KEY ? (
+                            <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800 flex items-center gap-2">
+                                <Key className="w-4 h-4" />
+                                <span>Managed by Environment Variable</span>
+                            </div>
+                        ) : (
+                            <div className="flex gap-2">
+                                <input
+                                    type="password"
+                                    value={apiKey}
+                                    onChange={(e) => setApiKey(e.target.value)}
+                                    placeholder="AIza..."
+                                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                />
+                                <button
+                                    onClick={testGemini}
+                                    className="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors text-sm"
+                                >
+                                    Test
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     {/* Supabase Section */}

@@ -31,7 +31,12 @@ export async function generateResponse(
     lastAction: AdaptiveAction | null
 ): Promise<string> {
     try {
-        const genAI = new GoogleGenerativeAI(apiKey);
+        const finalApiKey = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
+        if (!finalApiKey) {
+            return "Error: Gemini API Key is missing. Please set it in Settings or .env file.";
+        }
+
+        const genAI = new GoogleGenerativeAI(finalApiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         // Construct context
