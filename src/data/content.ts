@@ -264,6 +264,16 @@ export const exercises: Record<string, Exercise[]> = {
             correctAnswer: "50 J",
             explanation: "W = F * d * cos(0) = 10 * 5 * 1 = 50 J.",
             difficulty: 'easy'
+        },
+        {
+            id: 'e4-2',
+            conceptId: 'c4',
+            type: 'multiple-choice',
+            prompt: "A waiter carries a tray of food across a horizontal room at constant speed. How much work does the waiter do on the tray?",
+            choices: ["Zero", "Positive work", "Negative work", "Depends on the speed"],
+            correctAnswer: "Zero",
+            explanation: "The force (upwards) is perpendicular to the displacement (horizontal). cos(90°) = 0, so Work = 0.",
+            difficulty: 'medium'
         }
     ],
     'c5': [
@@ -290,7 +300,28 @@ export const exercises: Record<string, Exercise[]> = {
             difficulty: 'easy'
         }
     ],
-    'c7': []
+    'c7': [
+        {
+            id: 'e7-1',
+            conceptId: 'c7',
+            type: 'multiple-choice',
+            prompt: "A 2 kg ball hits a wall at 10 m/s and bounces back at 10 m/s. What is the magnitude of the impulse delivered to the ball?",
+            choices: ["0 N·s", "20 N·s", "40 N·s", "10 N·s"],
+            correctAnswer: "40 N·s",
+            explanation: "Impulse = Change in momentum. Δp = m(vf - vi). If vi = +10, vf = -10. Δp = 2(-10 - 10) = -40. Magnitude is 40.",
+            difficulty: 'hard'
+        },
+        {
+            id: 'e7-2',
+            conceptId: 'c7',
+            type: 'multiple-choice',
+            prompt: "In a car crash, airbags reduce injury by:",
+            choices: ["Increasing the force", "Decreasing the impulse", "Increasing the time of impact", "Decreasing the momentum change"],
+            correctAnswer: "Increasing the time of impact",
+            explanation: "Impulse is fixed (to stop the car). Increasing Δt reduces the average Force (F = J/Δt).",
+            difficulty: 'medium'
+        }
+    ]
 };
 
 export const units: Unit[] = [
